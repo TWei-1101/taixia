@@ -425,11 +425,20 @@ static const uint8_t RESPONSE_LENGTH = 255;
   }
 
   void TaiXia::loop() {
-    if (!available())
-      return;
-
     while (available()) {
       readline(true);
+    }
+  
+    static uint32_t last_status_poll = 0;
+    const uint32_t now = millis();
+  
+    if (now < 5000) {
+      return;
+    }
+  
+    if (last_status_poll == 0 || now - last_status_poll >= 30000) {
+      last_status_poll = now;
+      this->send(6, 0, 0x00, SERVICE_ID_READ_STATUS, 0xFFFF);
     }
   }
 
