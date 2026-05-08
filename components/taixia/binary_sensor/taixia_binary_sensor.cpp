@@ -12,6 +12,13 @@ static const char *const TAG = "taixia.binary_sensor";
       this->parent_->send(6, 0, 0, SERVICE_ID_READ_STATUS, 0xffff);
   }
 
+  void TaiXiaBinarySensor::update() {
+    if (this->sa_id_ == SA_ID_DEHUMIDIFIER &&
+        this->service_id_ == SERVICE_ID_DEHUMIDTFIER_WATER_TANK_FULL) {
+      this->parent_->send(6, 0, 0, SERVICE_ID_READ_STATUS, 0xffff);
+    }
+  }
+
   void TaiXiaBinarySensor::handle_response(std::vector<uint8_t> &response) {
     uint8_t i;
 
