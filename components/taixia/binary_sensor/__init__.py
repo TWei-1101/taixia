@@ -82,7 +82,7 @@ TAIXIA_BINARY_SENSOR_SCHEMA = binary_sensor.binary_sensor_schema(
     icon=ICON_CHIP,
     device_class=DEVICE_CLASS_POWER,
     entity_category=ENTITY_CATEGORY_DIAGNOSTIC
-).extend(cv.COMPONENT_SCHEMA)
+).extend(cv.polling_component_schema("5s"))
 
 TAIXIA_COMPONENT_SCHEMA = cv.Schema(
     {
