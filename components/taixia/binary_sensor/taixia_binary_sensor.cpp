@@ -27,8 +27,6 @@ static const char *const TAG = "taixia.binary_sensor";
         response[4], response[5], response[6], response[7], response[8]);
 
     for (i = 6; i < response[0] - 3; i+=3) {
-      ESP_LOGI(TAG, "status item: service=0x%02X high=0x%02X low=0x%02X",
-             response[i], response[i + 1], response[i + 2]);
       if (this->service_id_ == 0x00) {
         this->state = bool(response[4]);
         goto done;
